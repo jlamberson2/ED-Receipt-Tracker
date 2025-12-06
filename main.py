@@ -23,12 +23,22 @@ def addData(name, email, phone, purchase):
             writer.writerow(dataline)
 
 def confirm_button():
+    #gets the data from the entries
     name = name_entry.get()
     email = email_entry.get()
     phone = phone_entry.get()
     products = product_entry.get()
 
+    #add the data to the csv
     addData(name, email, phone, products)
+
+    #delete the text out of the enties
+    name_entry.delete(0, tkinter.END)
+    email_entry.delete(0, tkinter.END)
+    phone_entry.delete(0, tkinter.END)
+    product_entry.delete(0, tkinter.END)
+
+
 
 #Base GUI code
 
