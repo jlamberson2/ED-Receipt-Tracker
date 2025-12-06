@@ -4,13 +4,13 @@ import tkinter
 
 
 #headings to the CSV and example data
-headers = ['Name','Email','Phone Number','Purchases']
+headers = ['Name','Email','Phone Number','Purchases', 'Soul Numbers']
 
 file_path = "currentReceipts.csv"
 
 #Adds the data inputed into a spreadsheet. if the csv does not exist, create it
-def addData(name, email, phone, purchase):
-    dataline = [name, email, phone, purchase]
+def addData(name, email, phone, purchase, souls):
+    dataline = [name, email, phone, purchase, souls]
 
     if os.path.exists(file_path):
         with open(file_path, 'a', newline='') as file:
@@ -28,15 +28,17 @@ def confirm_button():
     email = email_entry.get()
     phone = phone_entry.get()
     products = product_entry.get()
+    souls = soul_entry.get()
 
     #add the data to the csv
-    addData(name, email, phone, products)
+    addData(name, email, phone, products, souls)
 
     #delete the text out of the enties
     name_entry.delete(0, tkinter.END)
     email_entry.delete(0, tkinter.END)
     phone_entry.delete(0, tkinter.END)
     product_entry.delete(0, tkinter.END)
+    soul_entry.delete(0, tkinter.END)
 
 
 
@@ -51,22 +53,25 @@ tkinter.Label(master=root, text='Name:').grid(row=0)
 tkinter.Label(master=root, text='Email:').grid(row=1)
 tkinter.Label(master=root, text='Phone:').grid(row=2)
 tkinter.Label(master=root, text='Product:').grid(row=3)
+tkinter.Label(master=root, text='Souls:').grid(row=4)
 
 #Adding entries for the program
 name_entry = tkinter.Entry(root, width=50)
 email_entry = tkinter.Entry(root, width=50)
 phone_entry = tkinter.Entry(root, width=50)
 product_entry = tkinter.Entry(root, width=50)
+soul_entry = tkinter.Entry(root, width=50)
 
 #placement for the entries
 name_entry.grid(row=0, column=1)
 email_entry.grid(row=1, column=1)
 phone_entry.grid(row=2, column=1)
 product_entry.grid(row=3, column=1)
+soul_entry.grid(row=4, column=1)
 
 #adding a confirm button
 confirm = tkinter.Button(root, text="Confirm", width=20, command=confirm_button)
-confirm.grid(row=4)
+confirm.grid(row=5)
 
 #initalizes main window - NOTE: put widgets before this
 root.mainloop()
