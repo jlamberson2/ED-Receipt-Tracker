@@ -3,6 +3,8 @@ import os
 import tkinter
 from tkinter import ttk
 from tkinter import messagebox
+from tkinter import *
+import tkinter.font as TKfont
 
 
 #headings to the CSV and example data
@@ -163,50 +165,67 @@ def confirm_button():
 #creates the root screen
 root = tkinter.Tk()
 root.title('ED Receipt Tracker')
-root.geometry("500x300")
+root.geometry("900x400")
+root.resizable(False, False)
+
+#Label and text box fonts
+default_font = TKfont.Font(family='Ariel', size=18)
 
 
 #Frame for the entire UI so it can be centered
 centerFrame = tkinter.Frame(root)
-centerFrame.place(relx=0.5, rely=0.5, anchor=tkinter.CENTER)
+centerFrame.pack(padx=0.5, pady=0.5, anchor='center')
+
+centerFrame.columnconfigure(list(range(4)), weight=1)
+
+centerFrame.rowconfigure(list(range(11)), weight=1)
+
 
 #Labels for entries
-tkinter.Label(master=centerFrame, text='Name:').grid(row=0)
-tkinter.Label(master=centerFrame, text='Email:').grid(row=1)
-tkinter.Label(master=centerFrame, text='Phone:').grid(row=2)
-tkinter.Label(master=centerFrame, text='Product:').grid(row=3)
-tkinter.Label(master=centerFrame, text='Souls:').grid(row=4)
-tkinter.Label(master=centerFrame, text='Total Payment: ').grid(row=5)
+name_label = tkinter.Label(master=centerFrame, text='Name:', font=default_font)
+email_label = tkinter.Label(master=centerFrame, text='Email:', font=default_font)
+phone_label = tkinter.Label(master=centerFrame, text='Phone:', font=default_font)
+product_label = tkinter.Label(master=centerFrame, text='Product:', font=default_font)
+souls_label = tkinter.Label(master=centerFrame, text='Souls:', font=default_font)
+payment_label = tkinter.Label(master=centerFrame, text='Total Payment: ', font=default_font)
+
+#Adding labels to the grid
+name_label.grid(row=0, padx=5, pady=5)
+email_label.grid(row=1, padx=5, pady=5)
+phone_label.grid(row=2, padx=5, pady=5)
+product_label.grid(row=3, padx=5, pady=5)
+souls_label.grid(row=4, padx=5, pady=5)
+payment_label.grid(row=5, padx=5, pady=5)
 
 #Adding entries for the program
-name_entry = tkinter.Entry(centerFrame, width=50)
-email_entry = tkinter.Entry(centerFrame, width=50)
-phone_entry = tkinter.Entry(centerFrame, width=50)
-product_entry = tkinter.Entry(centerFrame, width=50)
-soul_entry = tkinter.Entry(centerFrame, width=50)
-payment_entry = tkinter.Entry(centerFrame, width=50)
+name_entry = tkinter.Entry(centerFrame, width=50, font=default_font)
+email_entry = tkinter.Entry(centerFrame, width=50, font=default_font)
+phone_entry = tkinter.Entry(centerFrame, width=50, font=default_font)
+product_entry = tkinter.Entry(centerFrame, width=50, font=default_font)
+soul_entry = tkinter.Entry(centerFrame, width=50, font=default_font)
+payment_entry = tkinter.Entry(centerFrame, width=50, font=default_font)
 
 #placement for the entries
-name_entry.grid(row=0, column=1)
-email_entry.grid(row=1, column=1)
-phone_entry.grid(row=2, column=1)
-product_entry.grid(row=3, column=1)
-soul_entry.grid(row=4, column=1)
-payment_entry.grid(row=5, column=1)
+name_entry.grid(row=0, column=1, padx=5, pady=5)
+email_entry.grid(row=1, column=1, padx=5, pady=5)
+phone_entry.grid(row=2, column=1, padx=5, pady=5)
+product_entry.grid(row=3, column=1, padx=5, pady=5)
+soul_entry.grid(row=4, column=1, padx=5, pady=5)
+payment_entry.grid(row=5, column=1, padx=5, pady=5)
 
 #adding a confirm button
-confirm = tkinter.Button(centerFrame, text="Confirm", width=20, command=confirm_button)
-confirm.grid(row=10)
+confirm = tkinter.Button(centerFrame, text="Confirm", width=20, command=confirm_button, font=default_font)
+confirm.grid(row=10, columnspan=2)
 
 
 
 #adding in choice box for payment selection
-tkinter.Label(master=centerFrame, text='Payment Type: ').grid(row=7)
+tkinter.Label(master=centerFrame, text='Payment Type: ', font=default_font).grid(row=7, padx=5, pady=5)
 
 #text variable for payment type
 payment_type = tkinter.StringVar()
 
-payment_selection = ttk.Combobox(master=centerFrame, width=25, textvariable=payment_type)
+payment_selection = ttk.Combobox(master=centerFrame, width=25, textvariable=payment_type, font=default_font)
 
 #adding selections to combobox
 payment_selection['values'] = ('Cash', 'Paypal', 'Venmo', 'QR Code Paypal', 'Square')
@@ -222,14 +241,14 @@ radioContainer = tkinter.Frame(centerFrame)
 radioContainer.grid(row=8, column=1)
 
 #adding the radio buttons to the frame
-product_radio_button = tkinter.Radiobutton(master=radioContainer, text="Product Sold", variable=v, value= 1)
-donation_radio_button = tkinter.Radiobutton(master=radioContainer, text="Dontation", variable=v, value= 2)
+product_radio_button = tkinter.Radiobutton(master=radioContainer, text="Product Sold", variable=v, value= 1, font=default_font)
+donation_radio_button = tkinter.Radiobutton(master=radioContainer, text="Dontation", variable=v, value= 2, font=default_font)
 product_radio_button.grid(row=0, column=0)
 donation_radio_button.grid(row=0, column=1)
 
 #temp button for testing only
-tester = tkinter.Button(centerFrame, text='test', width=20, command=tester_function)
-tester.grid(row=10, column=1)
+#tester = tkinter.Button(centerFrame, text='test', width=20, command=tester_function, font=default_font)
+#tester.grid(row=10, column=1)
 
 
 #initalizes main window - NOTE: put widgets before this
